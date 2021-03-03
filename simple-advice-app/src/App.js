@@ -29,14 +29,17 @@ class App extends Component {
 
    
 
-    getAdvice = () => {
-        axios.get('https://api.adviceslip.com/advice')
-        .then(( result) => { 
+    getAdvice = async () => {
+        try {
+            const response = await axios.get('https://api.adviceslip.com/advice')
+            if (response.data) {
             const {advice}= result.data.slip;
             console.log(advice);
             this.setState({advice});
+            } 
+        } catch ((error) => {
+            console.log(error)
         })
-        .catch((error) => {console.log(error)});
     }
 
 }
